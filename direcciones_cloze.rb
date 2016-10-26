@@ -10,7 +10,7 @@
 
 # TODO: mejor cambiamos la pregunta a una de tipo cloze...
 
-require 'ipaddr'
+require 'ip'
 
 preguntas = { 28 => 4,
               16 => 4,
@@ -33,7 +33,7 @@ $xml = '''<?xml version="1.0" encoding="UTF-8"?>
 '''
 
 $question = '''
-::Direcciones inicial y final:: Indica cual es la dirección inicial y final de las siguientes redes:
+Indica cual es la dirección inicial y final de las siguientes redes:
 <br /><br />
 '''
 
@@ -69,33 +69,12 @@ def random_ip()
   return "#{gen.rand(0..255)}.#{gen.rand(0..255)}.#{gen.rand(0..255)}.#{gen.rand(0..255)}"
 end
 
-def cidr_to_netmask(cidr)
-  IPAddr.new('255.255.255.255').mask(cidr).to_s
-end
 
-def ip_network(ip, bits_mascara)
-  IPAddr.new(ip).mask(bits_mascara).to_s
-end
-
-def ip_inicial(ip, bits_mascara)
-  IPAddr.new(ip).mask(bits_mascara).succ().to_s
-end
-
-def ip_final(ip, bits_mascara)
-  net = IPAddr.new("#{ip}/#{bits_mascara}")
-  IPAddr.new(net.to_range().last().to_i - 1, 2).to_s
+def response(bits_mascara)
+  ip = IP.new("#{random_ip}/#{bits_mascara}")
+  return "#{ip}<br />  Dirección inicial:{1:SHORTANSWER:%100%#{(ip.network(1)).to_s.split("/")[0]}}  Dirección final:{1:SHORTANSWER:%100%#{(ip.broadcast(-1)).to_s.split("/")[0]}}<br /><br />"
 
 end
-
-def response(bits_mascara) 
-  ip = random_ip
-  network = ip_network(ip, bits_mascara)
-  inicial = ip_inicial(ip, bits_mascara)
-  final = ip_final(ip, bits_mascara)
-  #puts "#{ip} #{bits_mascara} #{network} #{inicial} #{final}"
-  return "#{network}/#{bits_mascara}  Dirección inicial:{1:SHORTANSWER:%100%#{inicial}} Dirección final:{1:SHORTANSWER:%100%#{final}}<br /><br />"
-end
-
 
 generate_question(preguntas)
 
