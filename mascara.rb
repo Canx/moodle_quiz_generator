@@ -17,7 +17,7 @@ preguntas = { 8 => 4,
 
 
 def generate_question(preguntas = {})
-  puts "::Máscara:: DadoIndica cual es la dirección de máscara de red de las siguientes redes {" 
+  puts "::Direccion de mascara:: DadoIndica cual es la dirección de máscara de red de las siguientes redes {" 
   
   preguntas.each do |tipo,cantidad|
     (1..cantidad).each do |n|
@@ -42,7 +42,7 @@ def ip_network(ip, bits_mascara)
 end
 
 def response(bits_mascara) 
-  return "Dirección de red: = #{ip_network(random_ip, bits_mascara)}/#{bits_mascara} -> #{cidr_to_netmask(bits_mascara)}"
+  return "=Dirección de red #{ip_network(random_ip, bits_mascara)}/#{bits_mascara} -> #{cidr_to_netmask(bits_mascara)}"
 end
 
 
