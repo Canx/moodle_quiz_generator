@@ -4,6 +4,15 @@ Scripts de generación automática de preguntas de redes para Moodle.
 La salida se puede importar en formato GIFT en Moodle.
 Lee cada script para ver si se puede parametrizar.
 
+Requisitos
+----------
+
+Instala 'ruby-ip':
+
+```
+# gem install ruby-ip
+```
+
 Preguntas realizadas
 --------------------
 * Clases de redes (clases_redes_match.rb). Formato GIFT
