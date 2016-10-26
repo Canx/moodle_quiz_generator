@@ -1,28 +1,43 @@
-Introducción
-------------
-Scripts de generación automática de preguntas para Moodle. La salida se puede importar en formato GIFT o XML en Moodle.
-
+Instrucciones de uso
+--------------------
+Scripts de generación automática de preguntas para Moodle.
+De momento todas las preguntas son de tipo "emparejamiento"
+La salida se puede importar en formato GIFT en Moodle.
 Lee cada script para ver si se puede parametrizar.
 
 Preguntas realizadas
 --------------------
-* Clases de redes (clases_redes.rb)
+* Clases de redes (clases_redes_match.rb). Formato GIFT
 
 Indica de que clase de red son las siguientes redes:
 
 192.168.0.0/24 -> clase privada C
 
-* Máscara por defecto (mascara_defecto.rb)
+* Máscara por defecto (mascara_defecto_match.rb). Formato GIFT
 
 Indica cual es la dirección de máscara por defecto de las siguientes redes:
 
 192.168.0.0 -> 255.255.255.0
 
-* Máscara (mascara.rb)
+* Máscara (mascara_match.rb). Formato GIFT
 
 Indica cual es la dirección de máscara de las siguientes redes:
 
 192.168.0.0/30 -> 255.255.255.252
+
+* Hosts (hosts_match.rb). Formato GIFT
+
+Indica cuantos hosts podemos albergar en las siguientes redes:
+
+192.168.0.0/24 -> 254
+
+* Direcciones (direcciones_cloze.rb). Formato XML
+
+Indica la dirección inicial y final de las siguientes redes:
+
+192.168.0.0/24 dirección inicial: <192.168.0.1>  dirección final: <192.168.0.254>
+
+
 
 Preguntas por desarrollar
 -------------------------
@@ -35,12 +50,3 @@ Preguntas por desarrollar
 * Preguntas de conversión entre unidades de tasa de transferencia:
 
 100 Mbps son <0,1> Gbps
-
-* Preguntas sobre dirección inicial y final de una red:
-
-192.168.0.0/24 dirección inicial: <192.168.0.1>  dirección final: <192.168.0.254>
-
-
-* Preguntas sobre número de hosts en una red:
-
-192.168.0.0/24 puede albergar X hosts.
