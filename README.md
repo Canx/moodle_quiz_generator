@@ -1,7 +1,6 @@
 Instrucciones de uso
 --------------------
-Scripts de generación automática de preguntas para Moodle.
-De momento todas las preguntas son de tipo "emparejamiento"
+Scripts de generación automática de preguntas de redes para Moodle.
 La salida se puede importar en formato GIFT en Moodle.
 Lee cada script para ver si se puede parametrizar.
 
@@ -37,16 +36,3 @@ Indica la dirección inicial y final de las siguientes redes:
 
 192.168.0.0/24 dirección inicial: <192.168.0.1>  dirección final: <192.168.0.254>
 
-
-
-Preguntas por desarrollar
--------------------------
-* Preguntas de conversión entre unidades de almacenamiento:
-
-34 GB son <X> MB
-8 bits son <1> bytes
-
-
-* Preguntas de conversión entre unidades de tasa de transferencia:
-
-100 Mbps son <0,1> Gbps
