@@ -18,6 +18,11 @@ Indica cual es la dirección de máscara por defecto de las siguientes redes:
 
 192.168.0.0 -> 255.255.255.0
 
+* Máscara (mascara.rb)
+
+Indica cual es la dirección de máscara de las siguientes redes:
+
+192.168.0.0/30 -> 255.255.255.252
 
 Preguntas por desarrollar
 -------------------------
@@ -39,10 +44,3 @@ Preguntas por desarrollar
 * Preguntas sobre número de hosts en una red:
 
 192.168.0.0/24 puede albergar X hosts.
-
-* Preguntas sobre conversión de máscara:
-
-Dada la red 192.168.0.0/24 su dirección de máscara es <255.255.255.0>
-
-
-
