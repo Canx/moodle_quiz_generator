@@ -8,11 +8,13 @@
 # primer parámetro: número de bits de máscara
 # segundo parámetro: número de preguntas
 require 'ip'
+require './lib/ipgen.rb'
 
-preguntas = { 8 => 4,
-              16 => 4,
-              24 => 4,
-              26 => 4
+preguntas = { {class: "A", private: true, default: true} => 4,
+              {class: "B", private: false, default: false} => 4,
+              {class: "C", private: true, default: false} => 4,
+              {class: "C", private: false, default: false} => 4,
+              {} => 1
             }
 
 
@@ -28,20 +30,10 @@ def generate_question(preguntas = {})
   puts "}"
 end
 
-def random_ip()
-  gen = Random.new
-  return "#{gen.rand(0..255)}.#{gen.rand(0..255)}.#{gen.rand(0..255)}.#{gen.rand(0..255)}"
-end
-
-def response(bits_mascara)
-  ip = IP.new("#{random_ip}/#{bits_mascara}")
+def response(params)
+  ipgen = IPGen.new(params)
+  ip = ipgen.get() 
   return "=Dirección de red #{ip} -> #{ip.netmask}"
 end
 
-
 generate_question(preguntas)
-
-
-
-
-
