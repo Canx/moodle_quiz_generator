@@ -31,7 +31,7 @@ end
 
 def response(params) 
   ip = IPGen.new(params)
-  return " =#{ip.get()} -> clase #{params[:class]}"
+  return " =#{ip.get()} -> clase #{"privada " if params[:private]}#{params[:class]}"
 end
 
 
