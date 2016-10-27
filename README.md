@@ -1,7 +1,7 @@
 Instrucciones de uso
 --------------------
 Scripts de generación automática de preguntas de redes para Moodle.
-La salida se puede importar en formato GIFT en Moodle.
+La salida se puede importar en formato GIFT o XML en Moodle.
 Lee cada script para ver si se puede parametrizar.
 
 Requisitos
