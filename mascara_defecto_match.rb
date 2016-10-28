@@ -6,12 +6,13 @@
 # 172.16.0.0    {255.255.0.0}
 # 10.0.0.0      {255.0.0.0}
 
-# Modifica el número de preguntas de cada tipo
-preguntas = {"255.0.0.0" => 4,
-             "255.255.0.0" => 4,
-             "255.255.255.0" => 4 
-            }
+require './lib/ipgen.rb'
 
+# Modifica el número de preguntas de cada tipo
+preguntas = {{class: "A", default: true} => 4,
+             {class: "B", default: true} => 4,
+             {class: "C", default: true} => 4 
+            }
 
 def generate_question(preguntas = {})
   puts "::Máscara por defecto:: Indica cual es la máscara por defecto de las siguientes redes {" 
@@ -25,36 +26,9 @@ def generate_question(preguntas = {})
   puts "}"
 end
 
-def response(mascara) 
-  gen = Random.new
-
-  case mascara 
-    when "255.0.0.0" then
-      number1 = gen.rand(1..126)
-      number2 = gen.rand(0..254)
-      number3 = gen.rand(0..254)
-      number4 = gen.rand(0..254)
-    when "255.255.0.0" then
-      number1 = gen.rand(128..191)
-      number2 = gen.rand(0..254)
-      number3 = gen.rand(0..254)
-      number4 = gen.rand(0..254)
-    when "255.255.255.0" then
-      number1 = gen.rand(192..223)
-      number2 = gen.rand(0..254)
-      number3 = gen.rand(0..254)
-      number4 = gen.rand(0..254)
-   end
-
-   ip = "#{number1}.#{number2}.#{number3}.#{number4}"
-  
-  return " =#{ip} -> #{mascara}"
+def response(params) 
+  ip = IPGen.new(params).get()
+  return " =#{ip.network.to_s.split("/")[0]} -> #{ip.netmask}"
 end
 
-
 generate_question(preguntas)
-
-
-
-
-

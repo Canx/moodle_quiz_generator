@@ -36,8 +36,3 @@ def response(params)
 end
 
 generate_question(preguntas)
-
-
-
-
-
