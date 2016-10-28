@@ -10,12 +10,12 @@
 
 # TODO: mejor cambiamos la pregunta a una de tipo cloze...
 
-require 'ip'
+require './lib/ipgen.rb'
 
-preguntas = { 28 => 4,
-              16 => 4,
-              24 => 4,
-              26 => 4 
+preguntas = { {mask: 28} => 4,
+              {mask: 16} => 4,
+              {mask: 24} => 4,
+              {mask: 26} => 4 
             }
 
 
@@ -38,15 +38,8 @@ Indica cual es la dirección inicial y final de las siguientes redes:
 '''
 
 def generate_question(preguntas = {})
- #puts "::Direccion de mascara:: DadoIndica cual es la dirección de máscara de red de las siguientes redes {" 
-  
-  # En close hay que cambiar para que sea aleatorio.
-  # Elegimos aleatoriamente un hash y le restamos un número. Si el número es 0 borramos el hash.
-  # Continuamos haciendolo hasta que no hayam entradas en el hash.
-  
-  
   lista = []
-  # reordenamos
+
   preguntas.each do |tipo,cantidad|
     (1..cantidad).each do |n|
       lista << tipo
@@ -59,25 +52,14 @@ def generate_question(preguntas = {})
       $question = $question + response(tipo)
   end
 
-  # procesamos el array
   $xml= $xml.sub! '*', $question
   puts $xml
 end 
 
-def random_ip()
-  gen = Random.new
-  return "#{gen.rand(0..255)}.#{gen.rand(0..255)}.#{gen.rand(0..255)}.#{gen.rand(0..255)}"
-end
-
-
-def response(bits_mascara)
-  ip = IP.new("#{random_ip}/#{bits_mascara}")
-  return "#{ip}<br />  Dirección inicial:{1:SHORTANSWER:%100%#{(ip.network(1)).to_s.split("/")[0]}}  Dirección final:{1:SHORTANSWER:%100%#{(ip.broadcast(-1)).to_s.split("/")[0]}}<br /><br />"
+def response(params)
+  ip = IPGen.new(params).get()
+  return "#{ip.network}<br />  Dirección inicial:{1:SHORTANSWER:%100%#{(ip.network(1)).to_s.split("/")[0]}}  Dirección final:{1:SHORTANSWER:%100%#{(ip.broadcast(-1)).to_s.split("/")[0]}}<br /><br />"
 
 end
 
 generate_question(preguntas)
-
-
-
-
