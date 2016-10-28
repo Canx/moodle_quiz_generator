@@ -30,8 +30,8 @@ def generate_question(preguntas = {})
 end
 
 def response(params) 
-  ip = IPGen.new(params)
-  return " =#{ip.get()} -> clase #{"privada " if params[:private]}#{params[:class]}"
+  ip = IPGen.new(params).get()
+  return " =#{ip} -> clase #{"privada " if params[:private]}#{params[:class]}"
 end
 
 
