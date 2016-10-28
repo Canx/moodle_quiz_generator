@@ -10,15 +10,10 @@
 
 # TODO: mejor cambiamos la pregunta a una de tipo cloze para que se puedan escribir los números...
 
-require 'ipaddr'
+require './lib/ipgen.rb'
 
-preguntas = { 
-               4 => 1,
-               8 => 1,
-              10 => 1,
-              16 => 1,
-              24 => 1,
-              26 => 1 
+preguntas = { { mask: 16} => 1,
+              { mask: 24} => 1
             }
 
 
@@ -34,27 +29,11 @@ def generate_question(preguntas = {})
   puts "}"
 end
 
-def random_ip()
-  gen = Random.new
-  return "#{gen.rand(0..255)}.#{gen.rand(0..255)}.#{gen.rand(0..255)}.#{gen.rand(0..255)}"
+def response(params) 
+  ipgen = IPGen.new(params)
+  ip = ipgen.get()
+  return "=Dirección de red #{ip.to_s} -> #{ip.size - 2}"
 end
-
-def cidr_to_netmask(cidr)
-  IPAddr.new('255.255.255.255').mask(cidr).to_s
-end
-
-def ip_network(ip, bits_mascara)
-  IPAddr.new(ip).mask(bits_mascara).to_s
-end
-
-def hosts(bits_mascara)
-  2**(32-bits_mascara)-2
-end
-
-def response(bits_mascara) 
-  return "=Dirección de red #{ip_network(random_ip, bits_mascara)}/#{bits_mascara} -> #{hosts(bits_mascara)}"
-end
-
 
 generate_question(preguntas)
 

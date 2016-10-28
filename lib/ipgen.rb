@@ -12,7 +12,8 @@ class IPGen
     list_class = Array.new(["A","B","C","D"])
     @class = params[:class] || list_class.sample
     @private = params[:private] || [true, false].sample
-    @default = params[:default] || [true, false].sample 
+    @default = params[:default] || [true, false].sample
+    @mask = params[:mask]
   end
 
   # obtiene una nueva ip según las condiciones del constructor
@@ -42,8 +43,15 @@ class IPGen
       @mascara = 4
       @number1 = @gen.rand(224..239)
     end
+ 
+    # Sobreescribimos la máscara si nos la han pasado.
+    @mascara = @mask if @mask
 
     @ip = IP.new("#{@number1}.#{@number2}.#{@number3}.#{@number4}/#{@mascara}") 
     return @ip
   end 
 end
+
+# Test
+#ip = IPGen.new({class: "C", private: true, mask: 8})
+#puts ip.get()
