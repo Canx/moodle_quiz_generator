@@ -10,29 +10,20 @@
 
 # TODO: mejor cambiamos la pregunta a una de tipo cloze para que se puedan escribir los números...
 
-require './lib/ipgen.rb'
+require './lib/genpreg.rb'
 
-preguntas = { { mask: 16} => 1,
-              { mask: 24} => 1
-            }
+pregunta = {
+    :titulo => "Número de hosts",
+    :descripcion => "Indica cuantos hosts podemos albergar en las siguientes redes",
+    :tipo => :gift,
+    :ipgen => {
+              { mask: 16} => 1,
+              { mask: 24} => 1},
 
+    :codigo => lambda { |params|
+       ip = IPGen.new(params).get()
+       return "=Dirección de red #{ip.to_s} -> #{ip.size - 2}"
+    }
+}
 
-def generate_question(preguntas = {})
-  puts "::Número de hosts:: Indica cuantos hosts podemos albergar en las siguientes redes {" 
-  
-  preguntas.each do |tipo,cantidad|
-    (1..cantidad).each do |n|
-      puts response(tipo)
-    end
-  end
- 
-  puts "}"
-end
-
-def response(params) 
-  ipgen = IPGen.new(params)
-  ip = ipgen.get()
-  return "=Dirección de red #{ip.to_s} -> #{ip.size - 2}"
-end
-
-generate_question(preguntas)
+generar_pregunta(pregunta)
