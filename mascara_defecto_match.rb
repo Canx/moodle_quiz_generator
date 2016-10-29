@@ -6,29 +6,22 @@
 # 172.16.0.0    {255.255.0.0}
 # 10.0.0.0      {255.0.0.0}
 
-require './lib/ipgen.rb'
+require './lib/genpreg.rb'
 
-# Modifica el número de preguntas de cada tipo
-preguntas = {{class: "A", default: true} => 4,
-             {class: "B", default: true} => 4,
-             {class: "C", default: true} => 4 
-            }
+pregunta = {
+    :titulo => "Máscara por defecto",
+    :descripcion => "Indica cual es la máscara por defecto de las siguientes redes",
+    :tipo => :gift,
+    :ipgen => {
+                 {class: "A", default: true} => 4,
+                 {class: "B", default: true} => 4,
+                 {class: "C", default: true} => 4 
+              },
+    
+    :codigo => lambda { |params|
+       ip = IPGen.new(params).get()
+       return " =#{ip.network.to_s.split("/")[0]} -> #{ip.netmask}"
+    }
+}
 
-def generate_question(preguntas = {})
-  puts "::Máscara por defecto:: Indica cual es la máscara por defecto de las siguientes redes {" 
-  
-  preguntas.each do |tipo,cantidad|
-    (1..cantidad).each do |n|
-      puts response(tipo)
-    end
-  end
- 
-  puts "}"
-end
-
-def response(params) 
-  ip = IPGen.new(params).get()
-  return " =#{ip.network.to_s.split("/")[0]} -> #{ip.netmask}"
-end
-
-generate_question(preguntas)
+generar_pregunta(pregunta)
