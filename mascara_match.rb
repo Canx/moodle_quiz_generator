@@ -7,33 +7,23 @@
 # Modifica el número de preguntas de cada tipo
 # primer parámetro: número de bits de máscara
 # segundo parámetro: número de preguntas
-require 'ip'
-require './lib/ipgen.rb'
+require './lib/genpreg.rb'
 
-preguntas = { {class: "A", private: true, default: true} => 4,
-              {class: "B", private: false, default: false} => 4,
-              {class: "C", private: true, default: false} => 4,
-              {class: "C", private: false, default: false} => 4,
-              {} => 1
-            }
+pregunta = {
+    :titulo => "Dirección de máscara",
+    :descripcion => "Indica cual es la dirección de máscara de red de las siguientes redes",
+    :tipo => :gift,
+    :ipgen => {
+                 {class: "A", private: true, default: true} => 4,
+                 {class: "B", private: false, default: false} => 4,
+                 {class: "C", private: true, default: false} => 4,
+                 {class: "C", private: false, default: false} => 4,
+              },
 
+    :codigo => lambda { |params|
+       ip = IPGen.new(params).get()
+       return "=Dirección de red #{ip} -> #{ip.netmask}"
+    }
+}
 
-def generate_question(preguntas = {})
-  puts "::Direccion de mascara:: Indica cual es la dirección de máscara de red de las siguientes redes {" 
-  
-  preguntas.each do |tipo,cantidad|
-    (1..cantidad).each do |n|
-      puts response(tipo)
-    end
-  end
- 
-  puts "}"
-end
-
-def response(params)
-  ipgen = IPGen.new(params)
-  ip = ipgen.get() 
-  return "=Dirección de red #{ip} -> #{ip.netmask}"
-end
-
-generate_question(preguntas)
+generar_pregunta(pregunta)
