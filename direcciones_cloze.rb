@@ -10,56 +10,28 @@
 
 # TODO: mejor cambiamos la pregunta a una de tipo cloze...
 
-require './lib/ipgen.rb'
+require './lib/genpreg.rb'
 
-preguntas = { {mask: 28} => 4,
-              {mask: 16} => 4,
-              {mask: 24} => 4,
-              {mask: 26} => 4 
-            }
-
-
-$xml = '''<?xml version="1.0" encoding="UTF-8"?>
-<quiz>
-<question type="cloze"><name><text>Direcciones inicial y final</text></name><questiontext format="html"><text>
-<![CDATA[*]]>
-</text>
-</questiontext>
-<generalfeedback format="html">
-<text/>
-</generalfeedback><penalty>0.3333333</penalty><hidden>0</hidden>
-</question>
-</quiz>
-'''
-
-$question = '''
-Indica cual es la dirección inicial y final de las siguientes redes:
-<br /><br />
-'''
-
-def generate_question(preguntas = {})
-  lista = []
-
-  preguntas.each do |tipo,cantidad|
-    (1..cantidad).each do |n|
-      lista << tipo
-    end
-  end
-
-  lista = lista.shuffle
-
-  lista.each do |tipo|
-      $question = $question + response(tipo)
-  end
-
-  $xml= $xml.sub! '*', $question
-  puts $xml
-end 
-
-def response(params)
-  ip = IPGen.new(params).get()
-  return "#{ip.network}<br />  Dirección inicial:{1:SHORTANSWER:%100%#{(ip.network(1)).to_s.split("/")[0]}}  Dirección final:{1:SHORTANSWER:%100%#{(ip.broadcast(-1)).to_s.split("/")[0]}}<br /><br />"
-
-end
-
-generate_question(preguntas)
+pregunta = {
+    :titulo => "Direcciones inicial y final",
+    :descripcion => "Indica cual es la dirección inicial y final de las siguientes redes:",
+    :tipo => :xml,
+    :ipgen => {
+                 {mask: 28} => 4,
+                 {mask: 16} => 4,
+                 {mask: 24} => 4,
+                 {mask: 26} => 4 
+            },
+    
+    :pre => "<br />\n<table><tr><th>Direcciones</th><th>Dirección inicial</th><th>Dirección final</th>",
+    :codigo => lambda { |params|
+       ip = IPGen.new(params).get()
+       return "\n<tr>
+  <td>#{ip.network}</td><td>{1:SHORTANSWER:%100%#{(ip.network(1)).to_s.split("/")[0]}}</td>
+  <td>{1:SHORTANSWER:%100%#{(ip.broadcast(-1)).to_s.split("/")[0]}}</td>
+</tr>"
+    },
+    :post => "</table>"
+}
+     
+generar_pregunta(pregunta)
