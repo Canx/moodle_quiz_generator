@@ -22,9 +22,9 @@ class PreguntaMoodle
 
   def generar_pregunta()
     output = self.before()
-    output = output + @pregunta[:pre]
+    output = output + (@pregunta[:pre] || "")
     output = output + self.questions()
-    output = output + @pregunta[:post]
+    output = output + (@pregunta[:post] || "")
     ouput = output + self.after()
   end
   
@@ -42,7 +42,7 @@ class PreguntaMoodle
  
     lista.each do |tipo|
         pregunta = @pregunta[:codigo].call(tipo)
-        output = output + pregunta
+        output = output + pregunta + "\n"
     end
     return output
   end
@@ -50,7 +50,7 @@ end
 
 class PreguntaGIFT < PreguntaMoodle
   def before()
-    "::#{pregunta[:titulo]}::#{pregunta[:descripcion]} {" 
+    "::#{pregunta[:titulo]}::#{pregunta[:descripcion]}{\n" 
   end
 
   def after()
