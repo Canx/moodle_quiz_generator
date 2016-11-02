@@ -12,7 +12,7 @@ class IPGen
     list_class = Array.new(["A","B","C","D"])
     @class = params[:class] || list_class.sample
     @private = params[:private] || false
-    @default = params[:default] || true
+    @default = params[:default] || false
     @mask = params[:mask]
   end
 
