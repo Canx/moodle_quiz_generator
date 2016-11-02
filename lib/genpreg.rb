@@ -64,7 +64,7 @@ class PreguntaXML < PreguntaMoodle
     "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <quiz>
 <question type=\"cloze\"><name><text>#{@pregunta[:titulo]}</text></name><questiontext format=\"html\"><text>
-<![CDATA[::#{@pregunta[:titulo]}:: #{@pregunta[:descripcion]}<br />"
+<![CDATA[#{@pregunta[:descripcion]}<br />"
   end
 
   def after()
