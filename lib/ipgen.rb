@@ -42,6 +42,12 @@ class IPGen
     when "D" then
       @mascara = 4
       @number1 = @gen.rand(224..239)
+    when "localhost" then
+      @mascara = 8
+      @number1 = "127"
+      @number2 = "0"
+      @number3 = "0"
+      @number4 = "1"
     end
  
     # Sobreescribimos la máscara si nos la han pasado.
