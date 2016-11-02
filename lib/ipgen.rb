@@ -11,8 +11,8 @@ class IPGen
     @gen = Random.new
     list_class = Array.new(["A","B","C","D"])
     @class = params[:class] || list_class.sample
-    @private = params[:private] || [true, false].sample
-    @default = params[:default] || [true, false].sample
+    @private = params[:private] || false
+    @default = params[:default] || true
     @mask = params[:mask]
   end
 
