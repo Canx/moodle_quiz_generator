@@ -13,9 +13,14 @@ class Quiz
   end
 
   def add(question_hash)
-    question_generator = QuestionGenerator.new(question_hash)
-    question = question_generator.create()
-    @questions << question
+    question_hash[:num] = 1 if !question_hash[:num]
+
+    (1..question_hash[:num].to_i).each do |id|
+      question_hash[:id] = id
+      question_generator = QuestionGenerator.new(question_hash)
+      question = question_generator.create()
+      @questions << question
+    end
   end
 
   def to_s

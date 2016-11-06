@@ -9,7 +9,7 @@ class Question
 
   def initialize(question_hash)
     @type = question_hash[:type]
-    @name = question_hash[:name]
+    @name = "#{question_hash[:name]}##{question_hash[:id]}"
     @description = question_hash[:description]
     @template = question_hash[:answers]
     @answers = Array.new()
