@@ -59,7 +59,16 @@ De momento solo existe un tipo de generador de preguntas, que es :ip
 Generador IP
 ------------
 
-Le pasamos varios hashes que representan formas de generar ips.
+Se pasamos varios hashes que representan formas de generar ips.
+
+```
+:ip => {
+                 {class: "A", private: true, default: true} => 4,
+                 {class: "B", private: false, mask: 20} => 1,
+                 {class: "C", private: true, default: false} => 4,
+                 {class: "C", private: false, default: false} => 4,
+       },
+```
 
 Cada tipo es definido como un hash al que se le puede indicar la clase (class), si la ip será privada (private), si tendrá máscara por defecto (default) o si tendrá una máscara determinada (mask).
 
