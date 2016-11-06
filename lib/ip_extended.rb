@@ -41,9 +41,18 @@ class IPExtended
   def to_bin
     @ip.to_b.to_s.rjust(32, '0').scan(/.{0,8}/)
   end
+ 
+  # TODO: hacer static 
+  def to_bin(ip)
+    IP.new(ip).to_b.to_s.rjust(32, '0').scan(/.{0,8}/)
+  end
 
   def split
     @ip.split
+  end
+
+  def pfxlen
+    @ip.pfxlen
   end
 
   def to_s
