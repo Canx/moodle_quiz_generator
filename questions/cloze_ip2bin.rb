@@ -11,7 +11,7 @@ question = {
   :answers => {
     :pre => "<br /><table><tr><th>Dirección</th><th>Dirección en binario</th><th>Clase (A,B, C o D)</th></tr>",
     :answer => "<tr>
-                   <td><%= ip.to_s %></td>
+                   <td><%= ip.to_addr %></td>
                    <td>{1:SHORTANSWER:%100%<%= ip.to_bin[0] %>}.<%= ip.to_bin[1] + '.' + ip.to_bin[2] + '.' + ip.to_bin[3] %></td>
                    <td>{1:MULTICHOICE:<%= '%100%' if ip.class_ip == 'A'%>A~<%= '%100%' if ip.class_ip == 'B'%>B~<%= '%100%' if ip.class_ip == 'C'%>C~<%= '%100%' if ip.class_ip == 'D'%>D}</td>
                 </tr>",

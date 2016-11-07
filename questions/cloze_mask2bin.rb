@@ -31,7 +31,7 @@ question = {
              <td>255.255.255.0</td><td>11111111.11111111.11111111.00000000</td><td>24</td>",
     :answer => "<tr>
                    <td><%= ip.netmask %></td>
-                   <td>{1:SHORTANSWER:%100%<%= ip.to_bin(ip.netmask.to_s)[0] %>}.{1:SHORTANSWER:%100%<%= ip.to_bin(ip.netmask.to_s)[1] %>}.{1:SHORTANSWER:%100%<%= ip.to_bin(ip.netmask.to_s)[2] %>}.{1:SHORTANSWER:%100%<%= ip.to_bin(ip.netmask.to_s)[3] %>}</td>
+                   <td>{1:SHORTANSWER:%100%<%= IPExtended.to_bin(ip.netmask.to_s)[0] %>}.{1:SHORTANSWER:%100%<%= IPExtended.to_bin(ip.netmask.to_s)[1] %>}.{1:SHORTANSWER:%100%<%= IPExtended.to_bin(ip.netmask.to_s)[2] %>}.{1:SHORTANSWER:%100%<%= IPExtended.to_bin(ip.netmask.to_s)[3] %>}</td>
                   <td>{1:SHORTANSWER:%100%<%= ip.pfxlen %>}</td>
                 </tr>",
     :post => "</table>"

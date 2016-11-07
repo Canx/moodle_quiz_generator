@@ -17,15 +17,7 @@ class IPExtended
     clase = "E" if self.to_bin[0][0..4] == "1111"
     return clase
   end
-    
-  def netmask
-    @ip.netmask
-  end
-
-  def size
-    @ip.size
-  end
-
+      
   def initial
     (@ip.network(1)).to_s.split("/")[0]
   end
@@ -34,31 +26,21 @@ class IPExtended
     (@ip.broadcast(-1)).to_s.split("/")[0]
   end  
 
-  def network
-    @ip.network
-  end
-
-  def to_bin
+  def to_bin()
     @ip.to_b.to_s.rjust(32, '0').scan(/.{0,8}/)
   end
- 
-  # TODO: hacer static 
-  def to_bin(ip)
+
+  # class methods 
+  def self.to_bin(ip)
     IP.new(ip).to_b.to_s.rjust(32, '0').scan(/.{0,8}/)
-  end
-
-  def split
-    @ip.split
-  end
-
-  def pfxlen
-    @ip.pfxlen
   end
 
   def to_s
     @ip.to_s
   end
- 
-  
 
+  private
+  def method_missing(method, *args, &block)
+    @ip.send(method, *args, &block)
+  end
 end

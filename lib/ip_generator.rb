@@ -1,5 +1,3 @@
-# mirar de ipgen, ver interfaz utilizado
-
 require './lib/ip_extended.rb'
 
 class IPGenerator
