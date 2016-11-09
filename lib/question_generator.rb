@@ -12,6 +12,8 @@ class QuestionGenerator
     case question_hash[:generator]
     when :ip
       @generator = IPGenerator.new(question_hash[:ip])
+    when :random
+      @generaton = RandomGenerator.new(question_hash[:random])
     end
   end
   

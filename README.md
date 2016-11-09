@@ -52,14 +52,16 @@ question = {
 }
 ```
 
-De momento solo están implementados los tipos :matching y :cloze. Observa los ejemplos y el código para ver como funcionan.
+De momento solo están implementados los tipos :matching (emparejar) y :cloze (pregunta cloze).
 
-De momento solo existe un tipo de generador de preguntas, que es :ip
+De momento solo existe un tipo de generador de preguntas (:ip), que genera diferentes tipos de ips aleatorias en base a unos parámetros.
+
+En la carpeta 'questions' puedes ver ejemplos de preguntas.
 
 Generador IP
 ------------
 
-Se pasamos varios hashes que representan formas de generar ips.
+Le pasamos varios hashes que representan formas de generar ips.
 
 ```
 :ip => {
@@ -76,10 +78,4 @@ Como valor ponemos el número de ips de ese tipo que se van a generar
 
 Preguntas realizadas
 --------------------
-* cloze_addresses.rb
-* cloze_subnetting.rb
-* cloze_ip2bin.rb
-* match_hosts.rb
-* match_network_mask.rb
-* match_default_mask.rb
-* match_network_class.rb
+

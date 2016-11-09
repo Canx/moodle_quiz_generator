@@ -13,6 +13,16 @@ require './lib/quiz.rb'
 quiz = Quiz.new()
 
 # TODO: si no se le pasan parámetros lee todos los archivos del directorio questions y muestra una descripción de cada uno
+
+if ARGV.length == 0 then
+  puts "USO:"
+  puts "  genquiz [lista de archivos de preguntas] > cuestionario.xml"
+  puts "Ejemplos:"
+  puts "  genquiz questions/cloze_addresses.rb > pregunta.xml"
+  puts "  genquiz questions/* > cuestionario.xml"
+  exit
+end
+
 ARGV.each do |file|
   question = eval(File.open(file).read)
   quiz.add(question)
