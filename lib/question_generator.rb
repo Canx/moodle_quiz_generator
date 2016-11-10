@@ -1,5 +1,6 @@
 require './lib/question.rb'
 require './lib/ip_generator.rb'
+require './lib/random_generator.rb'
 
 class QuestionGenerator
   @question_hash
@@ -13,7 +14,7 @@ class QuestionGenerator
     when :ip
       @generator = IPGenerator.new(question_hash[:ip])
     when :random
-      @generaton = RandomGenerator.new(question_hash[:random])
+      @generator = RandomGenerator.new(question_hash[:random])
     end
   end
   
