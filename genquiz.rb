@@ -23,9 +23,14 @@ if ARGV.length == 0 then
   exit
 end
 
-ARGV.each do |file|
-  question = eval(File.open(file).read)
-  quiz.add(question)
+begin
+  ARGV.each do |file|
+    question = eval(File.open(file).read)
+    quiz.add(question)
+  end
+rescue Exception => e
+  puts "Error: #{e.message}"
+  exit
 end
 
 puts quiz
