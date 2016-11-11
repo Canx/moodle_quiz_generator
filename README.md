@@ -40,13 +40,14 @@ question = {
   :type => :matching,
   :name => "Dirección de máscara",
   :description => "Indica cual es la dirección de máscara de red de las siguientes redes",
-  :generator => :ip,
-  :ip => {
+  :generators => {
+     :ip => {
+        "ip" => {
                  {class: "A", private: true, default: true} => 4,
                  {class: "B", private: false, default: false} => 4,
                  {class: "C", private: true, default: false} => 4,
-                 {class: "C", private: false, default: false} => 4,
-         },
+                 {class: "C", private: false, default: false} => 4}}
+  },
   :answers => { :left => "Dirección de red <%= ip.to_s %>",
                 :right => "<%= ip.netmask %>" }
 }
@@ -54,28 +55,81 @@ question = {
 
 De momento solo están implementados los tipos :matching (emparejar) y :cloze (pregunta cloze).
 
-De momento solo existe un tipo de generador de preguntas (:ip), que genera diferentes tipos de ips aleatorias en base a unos parámetros.
+En :generators indicamos los generadores de valores. Cada generador de valores estará asociado a 1 o más variables que podrán ser utilizadas en :answers
 
-En la carpeta 'questions' puedes ver ejemplos de preguntas.
+Es posible utilizar dos tipos de generadores:
+
+ * ip (:ip)
+
+   Permite generar diferentes tipos de ips, por tipo (A,B,C...), restringir si es privada o no, si tiene máscara por defecto, indicar la máscara,...)
+
+ * random (:random)
+   
+   Permite generar números aleatorios en un rango, y añadiendole un multiplicador opcional
+
 
 Generador IP
 ------------
 
-Le pasamos varios hashes que representan formas de generar ips.
+Le pasamos varios hashes que representan formas de generar ips. Por ejemplo:
 
 ```
-:ip => {
-                 {class: "A", private: true, default: true} => 4,
-                 {class: "B", private: false, mask: 20} => 1,
-                 {class: "C", private: true, default: false} => 4,
-                 {class: "C", private: false, default: false} => 4,
-       },
+:generators => {
+  :ip => { "ip1" =>
+           { {class: "A", private: true, default: true} => 4,
+             {class: "B", private: false, mask: 20} => 1,
+             {class: "C", private: true, default: false} => 4,
+             {class: "C", private: false, default: false} => 4 } } }
 ```
 
-Cada tipo es definido como un hash al que se le puede indicar la clase (class), si la ip será privada (private), si tendrá máscara por defecto (default) o si tendrá una máscara determinada (mask).
+Crearía 13 ips diferentes (4+1+4+4), cada una de un tipo:
+   * 4 ips de clase A privadas con máscara por defecto.
+   * 1 ip de clase B con máscara 20.
+   * 4 ips de clase C privadas con máscara aleatoria.
+   * 4 ips de clase C con máscara aleatoria.
 
-Como valor ponemos el número de ips de ese tipo que se van a generar
+Luego podremos usar la variable "ip1" en :answers.
 
-Preguntas realizadas
---------------------
+Mira el archivo lib/ip_generator para más info.
 
+Generador Random
+----------------
+Le pasamos el rango (:range) y un multiplicador opcional (:multiplier). Por ejemplo:
+
+```
+:generators => { :random => { "dado" =>  {  {:range => (1..6)} => 4 } } }
+```
+                
+Crearía un generador de un dado de 6 caras, que podría generar 4 tiradas diferentes. La variable dado podría ser utilizada en :answers.
+
+Mira el archivo lib/random_generator.rb para maś info.
+
+Preguntas
+---------
+
+* Matching (:matching)
+
+En :answers hay que seguir la siguiente estructura de hash:
+
+:answers => { :left => "", :right => "" }
+
+Es posible (y recomendable) utilizar bloques erb que referencien a las variables generadas, por ejemplo:
+
+:answers => { :left => "IP: <%= ip1.to_s %>", :right =>> "MASCARA: <%= ip.netmask %>"  }
+
+* Cloze (:cloze)
+
+Este tipo es mucho más genérico y debes conocer la [sintaxis de una pregunta cloze]: https://docs.moodle.org/31/en/Embedded_Answers_(Cloze)_question_type
+
+Se debe escribir las respuestas generadas dentro de answer, y también se deben utilizar bloques ERB. Además, se puede usar HTML.
+
+En este casos se pueden utilizar los hashes :pre y :post para indicar texto que no se repetirá para cada bloque de valores generados. Por ejemplo:
+
+```
+:answers => {
+               :pre => "<table>....",
+               :answer => "..."
+               :post => "</table>"
+```
+
+En la carpeta 'questions' puedes ver ejemplos de preguntas.
