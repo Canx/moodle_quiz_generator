@@ -20,6 +20,8 @@ class QuestionFactory
           @generators << IPGenerator.new(subhash)
         when :random
           @generators << RandomGenerator.new(subhash)
+        else
+          raise "'#{generator}' generator not implemented"
         end
       end
     end
