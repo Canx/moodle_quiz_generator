@@ -1,6 +1,6 @@
 question = {
   :type => :cloze,
-  :name => "Dirección a binario + mascara",
+  :name => "Dirección ip: binario a decimal",
   :description => "Pasa las siguientes direcciones IP en binario a decimal, y indica la clase:",
   :generators => {
      :ip => {
