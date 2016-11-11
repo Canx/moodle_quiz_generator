@@ -2,12 +2,13 @@ question = {
   :type => :cloze,
   :name => "Dirección a binario + mascara",
   :description => "Completa la traducción a binario de las siguientes IP's y indica su clase:",
-  :generator => :ip,
-  :ip => { {:class => "A"} => 2,
+  :generators => {
+     :ip => {
+       "ip" => { {:class => "A"} => 2,
            {:class => "B"} => 2,
            {:class => "C"} => 2,
-           {:class => "D"} => 2 
-         },
+           {:class => "D"} => 2}}
+  },
   :answers => {
     :pre => "<br /><table><tr><th>Dirección</th><th>Dirección en binario</th><th>Clase (A,B, C o D)</th></tr>",
     :answer => "<tr>

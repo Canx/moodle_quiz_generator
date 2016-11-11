@@ -2,11 +2,12 @@ question = {
   :type => :cloze,
   :name => "Dividir en 2 subredes",
   :description => "Dada la siguiente red divídela en 2 subredes iguales utilizando el formato de máscara abreviado CIDR (Ejemplo: 192.168.0.0/24 -> 192.168.0.0/25 y 192.168.127.0/25):",
-  :generator => :ip,
-  :ip => {
+  :generators => {
+     :ip => {
+        "ip" => {
                  {:class => "C" } => 4,
-                 {:class => "C", :default => false } => 4
-         },
+                 {:class => "C", :default => false } => 4 }}
+  },
   :answers => {
     :pre => "<br /><table><tr><th>Dirección de red</th><th>Primera subred</th><th>Segunda subred</th></tr>",
     :answer => "<br /><tr>

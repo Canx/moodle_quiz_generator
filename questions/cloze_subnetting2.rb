@@ -3,12 +3,13 @@ question = {
   :name => "Subnetting, red más adecuada",
   :description => "Dado el número de hosts que puede albergar la red y una ip aleatoria dentro de dicha red calcula a que dirección de red (en formato CIDR) pertenece la ip, así como la ip inicial y final de dicha red:",
   :num => 1,
-  :generator => :ip,
-  :ip => {
+  :generators => {
+    :ip => {
+      "ip" => {
               {mask: 28} => 1,
               {mask: 16} => 1,
               {mask: 24} => 1,
-              {mask: 26} => 1 
+              {mask: 26} => 1}}
   },
   :answers => {
     :pre => "    <br />\n

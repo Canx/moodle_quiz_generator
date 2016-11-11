@@ -1,8 +1,13 @@
 require './lib/ip_extended.rb'
 
 class IPGenerator
+  attr_reader :variable
+  @variable
 
-  def initialize(ipgen_hash)
+  def initialize(hash)
+    @variable = hash[0]
+    ipgen_hash = hash[1]
+
     @items = Array.new()
     @class_list = Array.new(["A","B","C","D"])
  
@@ -17,7 +22,9 @@ class IPGenerator
 
   def generate
     item = @items.pop
-    return nil if !item
+    if item.nil?
+      return nil
+    end
  
     
 
@@ -61,6 +68,8 @@ class IPGenerator
 
     ip_string = "#{number1}.#{number2}.#{number3}.#{number4}/#{mask}"
     ip = IPExtended.new(ip_string, private_ip, default_mask)
-    return {:ip => ip }
+    
+    # Aquí devolvemos el nombre del hash
+    return {@variable => ip }
   end
 end

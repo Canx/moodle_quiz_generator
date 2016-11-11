@@ -5,8 +5,12 @@ require './lib/ip_extended.rb'
 # optional: multiplier
 
 class RandomGenerator
+  attr_reader :variable
 
   def initialize(random_hash)
+    @variable = random_hash[0]
+    #puts "R:#{@variable}"
+    random_hash = random_hash[1]
 
     @items = Array.new()
     random_hash.each do |tipo,cantidad|
@@ -20,7 +24,7 @@ class RandomGenerator
 
   def generate
     item = @items.pop
-    return nil if !item
+    return nil if item.nil?
  
     gen = Random.new
     
@@ -30,6 +34,6 @@ class RandomGenerator
       multiplier = 1
     end
 
-    return {:random => ( gen.rand(item[:range]) * multiplier ) }
+    return {@variable => ( gen.rand(item[:range]) * multiplier ) }
   end
 end

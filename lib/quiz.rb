@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require './lib/question_generator.rb'
+require './lib/question_factory.rb'
 require 'builder'
 
 # Quiz class
@@ -17,8 +17,8 @@ class Quiz
 
     (1..question_hash[:num].to_i).each do |id|
       question_hash[:id] = id
-      question_generator = QuestionGenerator.new(question_hash)
-      question = question_generator.create()
+      question_factory = QuestionFactory.new(question_hash)
+      question = question_factory.create()
       @questions << question
     end
   end
