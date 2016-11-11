@@ -9,7 +9,6 @@ class RandomGenerator
 
   def initialize(random_hash)
     @variable = random_hash[0]
-    #puts "R:#{@variable}"
     random_hash = random_hash[1]
 
     @items = Array.new()
@@ -33,6 +32,8 @@ class RandomGenerator
     else
       multiplier = 1
     end
+
+    raise "':range' option not specified in random generator." if !item.key?(:range)
 
     return {@variable => ( gen.rand(item[:range]) * multiplier ) }
   end

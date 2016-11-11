@@ -22,6 +22,8 @@ class Question
         self.extend(Cloze)
       when :matching
         self.extend(Matching)
+      else
+        raise "'#{@type}' question type not implemented"
     end
   end
 
