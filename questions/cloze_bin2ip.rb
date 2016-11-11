@@ -4,10 +4,10 @@ question = {
   :description => "Pasa las siguientes direcciones IP en binario a decimal, y indica la clase:",
   :generators => {
      :ip => {
-       "ip" => { {:class => "A"} => 2,
-           {:class => "B"} => 2,
-           {:class => "C"} => 2,
-           {:class => "D"} => 2}}
+       "ip" => { {:class => "A"} => 1,
+           {:class => "B"} => 1,
+           {:class => "C"} => 1,
+           {:class => "D"} => 1}}
   },
   :answers => {
     :pre => "<br /><table><tr><th>Dirección en binario</th><th>Dirección</th><th>Clase (A,B, C o D)</th></tr>",
