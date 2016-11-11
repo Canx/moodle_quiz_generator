@@ -62,6 +62,8 @@ class IPGenerator
       number2 = "0"
       number3 = "0"
       number4 = "1"
+    else
+      raise "class '#{class_ip}' not supported"
     end
  
     mask = input_mask if input_mask
