@@ -15,7 +15,6 @@ class CodeGenerator
   def self.generate_hash(orig_hash)
     result_hash = orig_hash.clone
 
-    # hacemos los inversos
     orig_hash.each do |pair, value|
       result_hash.merge!({[pair[1],pair[0]] => 1.to_f/value})
     end
@@ -45,4 +44,5 @@ class CodeGenerator
       raise "Conversion '#{origin_unit} to #{result_unit}' not found in convert_hash"
     end
   end 
+
 end

@@ -1,7 +1,7 @@
 Instrucciones de uso
 --------------------
 Script para generación automática de preguntas en Moodle.
-La salida se puede importar en formato XML en Moodle.
+La salida se puede importar en Moodle (formato XML).
 
 Requisitos
 ----------
@@ -31,7 +31,7 @@ $ ./genpreg.rb q1.rb q2.rb
 $ ./genpreg.rb ./questions/* 
 ```
 
-El comando generará por pantalla la salida en xml de la pregunta. Para guardar la pregunta redirígela a una archivo:
+El comando generará por pantalla la salida en xml de la pregunta. Para guardar la pregunta redirígela a un archivo:
 
 ```
 $ ./genpreg.rb q1.rb > q1.xml
@@ -40,7 +40,7 @@ $ ./genpreg.rb q1.rb > q1.xml
 Estructura de una pregunta
 --------------------------
 
-Cada pregunta se estructura como una hash de ruby. Por ejemplo:
+Cada pregunta se estructura como un hash de ruby. Por ejemplo:
 
 ```
 question = {
@@ -72,7 +72,11 @@ Es posible utilizar dos tipos de generadores:
 
  * random (:random)
    
-   Permite generar números aleatorios en un rango, y añadiendole un multiplicador opcional
+   Permite generar números aleatorios en un rango añadiendole un multiplicador opcional, o elementos aleatorios de una lista.
+
+ * code (:code)
+
+   Permite generar código mediante un lambda, que puede acceder a las variables generadas previamente.
 
 
 Generador IP
@@ -109,7 +113,31 @@ Le pasamos el rango (:range) y un multiplicador opcional (:multiplier). Por ejem
                 
 Crearía un generador de un dado de 6 caras, que podría generar 4 tiradas diferentes. La variable dado podría ser utilizada en :answers.
 
+Si le pasamos una lista de elementos (:elements) nos devuelve un valor aleatorio de esa lista. Por ejemplo:
+
+```
+:generators => { :random => { "dia" => { {:elements => ["Lunes", "Martes", Miércoles", "Jueves", "Viernes"]} => 3 } } }
+```
+Crearía un generador asociado a la variable "dia" que devolvería 3 días de la semana aleatorios.
+
 Mira el archivo lib/random_generator.rb para maś info.
+
+Generador Code
+--------------
+Le pasamos un lambda al que se le pasa como parámetro un hash con los valores generados en la tanda actual. Por ejemplo:
+
+```
+:generators => { :random => { "dado" =>  {  {:range => (1..6)} => 4 } },
+               { :code => { "siguiente" => lambda |params| { return params[:dado] + 1 } } } }
+```
+
+
+Crearía una generador asociado a la variable "siguiente" que devolvería el siguiente valor de "dado".
+
+Existe una función "helper" llamada "CodeGenerator.to_unit" que permite convertir una medida de una unidad a otra. Mira el ejemplo questions/cloze_capacity_units.rb para más info.
+
+Mira el archivo lib/code_generator.rb para más info.
+
 
 Preguntas
 ---------
@@ -120,15 +148,15 @@ En :answers hay que seguir la siguiente estructura de hash:
 
 :answers => { :left => "", :right => "" }
 
-Es posible (y recomendable) utilizar bloques erb que referencien a las variables generadas, por ejemplo:
+Es posible (y recomendable) utilizar bloques ERB que referencien a las variables generadas anteriormente. Por ejemplo:
 
 :answers => { :left => "IP: <%= ip1.to_s %>", :right =>> "MASCARA: <%= ip.netmask %>"  }
 
 * Cloze (:cloze)
 
-Este tipo es mucho más genérico y debes conocer la [sintaxis de una pregunta cloze]: https://docs.moodle.org/31/en/Embedded_Answers_(Cloze)_question_type
+Este tipo es mucho más genérico y debes conocer la sintaxis de una pregunta cloze (https://docs.moodle.org/31/en/Embedded_Answers_(Cloze)_question_type)
 
-Se debe escribir las respuestas generadas dentro de answer, y también se deben utilizar bloques ERB. Además, se puede usar HTML.
+Se debe escribir las respuestas generadas dentro de answer, y también se recomienda utilizar bloques ERB. Además, se puede usar HTML.
 
 En este casos se pueden utilizar los hashes :pre y :post para indicar texto que no se repetirá para cada bloque de valores generados. Por ejemplo:
 
