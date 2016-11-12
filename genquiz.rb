@@ -33,6 +33,7 @@ begin
   end
 rescue Exception => e
   puts "Error: #{e.message}"
+  puts e.backtrace
   exit
 end
 

@@ -1,6 +1,7 @@
 require './lib/question.rb'
 require './lib/ip_generator.rb'
 require './lib/random_generator.rb'
+require './lib/code_generator.rb'
 
 class QuestionFactory
   @question_hash
@@ -20,6 +21,8 @@ class QuestionFactory
           @generators << IPGenerator.new(subhash)
         when :random
           @generators << RandomGenerator.new(subhash)
+        when :code
+          @generators << CodeGenerator.new(subhash) # hay que pasarle las variables anteriores!
         else
           raise "'#{generator}' generator not implemented"
         end
@@ -38,7 +41,11 @@ class QuestionFactory
     loop do
       item = nil
       @generators.each do |generator| 
-        item = generator.generate()
+        if generator.is_a?(CodeGenerator)
+          item = generator.generate(items)
+        else
+          item = generator.generate()
+        end
         break if item.nil?
         items = items.merge(item)
       end

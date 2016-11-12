@@ -32,9 +32,15 @@ class RandomGenerator
     else
       multiplier = 1
     end
+  
+    if item.key?(:range) then
+      return {@variable => ( gen.rand(item[:range]) * multiplier ) }
+    end
 
-    raise "':range' option not specified in random generator." if !item.key?(:range)
+    if item.key?(:elements) then
+      return {@variable => item[:elements].sample }
+    end     
 
-    return {@variable => ( gen.rand(item[:range]) * multiplier ) }
+    raise "':range' or ':elements' option must be specified in random generator."
   end
 end
