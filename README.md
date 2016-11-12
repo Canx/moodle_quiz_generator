@@ -6,12 +6,19 @@ La salida se puede importar en formato XML en Moodle.
 Requisitos
 ----------
 
-Instala 'ruby-ip' y 'builder':
+Instalar ruby (2.0 recomendado):
 
 ```
-# gem install ruby-ip
-# gem install builder
+$ sudo apt-get install ruby2.0
 ```
+
+Instala las dependencias (ruby-ip y builder)
+
+```
+$ gem install bundler
+$ bundle install
+```
+
 
 Utilización
 -----------
