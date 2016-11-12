@@ -8,6 +8,9 @@
 
 # TODO: crear estructura de archivos
 
+require 'rubygems'
+require 'bundler/setup'
+
 require './lib/quiz.rb'
 
 quiz = Quiz.new()
