@@ -2,6 +2,7 @@ question = {
   :type => :cloze,
   :name => "Unidades de almacenamiento",
   :description => "Transforma las siguientes unidades de almacenamiento a la unidad de destino:",
+  :num => 3,
   :generators => {
     :random => {
       :origin_size => {{ :range => (1..100), :multiplier => 1000 } => 4 },
