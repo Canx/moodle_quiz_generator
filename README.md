@@ -118,6 +118,7 @@ Si le pasamos una lista de elementos (:elements) nos devuelve un valor aleatorio
 ```
 :generators => { :random => { "dia" => { {:elements => ["Lunes", "Martes", Miércoles", "Jueves", "Viernes"]} => 3 } } }
 ```
+
 Crearía un generador asociado a la variable "dia" que devolvería 3 días de la semana aleatorios.
 
 Mira el archivo lib/random_generator.rb para maś info.
@@ -146,11 +147,15 @@ Preguntas
 
 En :answers hay que seguir la siguiente estructura de hash:
 
+```
 :answers => { :left => "", :right => "" }
+```
 
 Es posible (y recomendable) utilizar bloques ERB que referencien a las variables generadas anteriormente. Por ejemplo:
 
+```
 :answers => { :left => "IP: <%= ip1.to_s %>", :right =>> "MASCARA: <%= ip.netmask %>"  }
+```
 
 * Cloze (:cloze)
 
