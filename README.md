@@ -31,10 +31,11 @@ $ ./genpreg.rb q1.rb q2.rb
 $ ./genpreg.rb ./questions/* 
 ```
 
-El comando generará por pantalla la salida en xml de la pregunta. Para guardar la pregunta redirígela a un archivo:
+El comando generará por pantalla la salida en xml de las preguntas. Para guardar las preguntas rediríge la salida a un archivo:
 
 ```
 $ ./genpreg.rb q1.rb > q1.xml
+$ ./genpreg.rb ./questions/* > quiz.xml
 ```
 
 Estructura de una pregunta
@@ -68,7 +69,7 @@ Es posible utilizar dos tipos de generadores:
 
  * ip (:ip)
 
-   Permite generar diferentes tipos de ips, por tipo (A,B,C...), restringir si es privada o no, si tiene máscara por defecto, indicar la máscara,...)
+   Permite generar diferentes tipos de ips, por tipo (A,B,C...), restringir si es privada o no, si tiene máscara por defecto, indicar la máscara,...
 
  * random (:random)
    
