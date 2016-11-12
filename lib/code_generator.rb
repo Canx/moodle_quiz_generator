@@ -12,6 +12,20 @@ class CodeGenerator
     return {@variable => @code[hash_params]}
   end
 
+    # Helper function to convert units
+  def self.to_unit(origin_size, origin_unit, result_unit, conversion_hash)
+    convert_hash = self.generate_hash(conversion_hash)
+                                 
+    if convert_hash.key?([origin_unit, result_unit])
+      origin_size*convert_hash[[origin_unit, result_unit]]
+    else
+      raise "Conversion '#{origin_unit} to #{result_unit}' not found in convert_hash"
+    end
+  end 
+
+
+  private
+
   def self.generate_hash(orig_hash)
     result_hash = orig_hash.clone
 
@@ -35,14 +49,5 @@ class CodeGenerator
     result_hash
   end
 
-  def self.to_unit(origin_size, origin_unit, result_unit, conversion_hash)
-    convert_hash = self.generate_hash(conversion_hash)
-                                 
-    if convert_hash.key?([origin_unit, result_unit])
-      origin_size*convert_hash[[origin_unit, result_unit]]
-    else
-      raise "Conversion '#{origin_unit} to #{result_unit}' not found in convert_hash"
-    end
-  end 
 
 end
