@@ -65,11 +65,18 @@ class IPGenerator
     else
       raise "class '#{class_ip}' not supported"
     end
- 
-    mask = input_mask if input_mask
+    
+    if input_mask.is_a?(Integer)
+      mask = input_mask
+    end
 
+
+    if input_mask.is_a?(Range)
+      mask = gen.rand(input_mask)
+    end
+   
     ip_string = "#{number1}.#{number2}.#{number3}.#{number4}/#{mask}"
-    ip = IPExtended.new(ip_string, private_ip, default_mask)
+    ip = IPExtended.new(ip_string, private_ip, mask)
     
     # Aquí devolvemos el nombre del hash
     return {@variable => ip }

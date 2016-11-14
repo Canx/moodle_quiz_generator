@@ -19,15 +19,23 @@ class IPExtended
   end
       
   def initial
-    (@ip.network(1)).to_s.split("/")[0]
+    @ip.network(1).to_s
   end
 
   def final
-    (@ip.broadcast(-1)).to_s.split("/")[0]
+    @ip.broadcast(-1).to_s
   end  
 
   def to_bin()
     @ip.to_b.to_s.rjust(32, '0').scan(/.{0,8}/)
+  end
+
+  def divide_by_subnets(n)
+    subnets = Array.new
+    @ip.divide_by_subnets(n).each do |subnet|
+      subnets << IPExtended.new(subnet.to_s,"","")
+    end
+    return subnets 
   end
 
   # class methods 

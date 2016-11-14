@@ -60,6 +60,10 @@ end
 module Cloze
   def add(item) 
     answer = erb(@template[:answer], item)
+
+    if @answers.empty? 
+      @pre = erb(@template[:pre], item)
+    end
     @answers << answer
   end
 
@@ -72,8 +76,9 @@ module Cloze
   end
  
   def cloze_cdata() 
-    text = @description
-    text = text + "\n" + @template[:pre]
+    text = ""
+    text = @description if @description
+    text = text + "\n" + @pre
     @answers.each do |answer|
       text = text + "\n" + answer
     end
