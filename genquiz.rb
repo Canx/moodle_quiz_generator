@@ -2,39 +2,75 @@
 
 # genquiz: genera preguntas importables desde Moodle (XML)
 
-# USO: genquiz <ficheros de preguntas hash>
-
-# TODO: leer ficheros pasados como parámetros
-
-# TODO: crear estructura de archivos
-
 require 'rubygems'
 require 'bundler/setup'
 
 require './lib/quiz.rb'
 
+VERSION = 0.1
+
+USAGE = <<ENDUSAGE
+Uso:
+  genquiz -o cuestionario.xml [lista de archivos de preguntas]
+ENDUSAGE
+
+HELP = <<ENDHELP
+  -h, --help     Mostrar esta ayuda
+  -v, --version  Mostrar el número de versión
+  -o, --output   El fichero donde se guardaran las preguntas
+
+Ejemplos:
+  genquiz -o cuestionario.xml questions/cloze_addresses.rb 
+  genquiz -o cuestionario.xml questions/*
+ENDHELP
+
+ARGS = { :output=>'quiz.xml', :files=>[] }
+UNFLAGGED_ARGS = [ :files ]
+next_arg = UNFLAGGED_ARGS.first
+ARGV.each do |arg|
+  case arg
+    when '-h','--help'	then ARGS[:help] = true
+    when '-v','--version' then ARGS[:version] = true
+    when '-o','--output' then next_arg = :output
+    else
+      if next_arg
+        if next_arg == :files
+          ARGS[ :files ] << arg
+        else
+          ARGS[next_arg] = arg
+        end
+      end
+      next_arg = UNFLAGGED_ARGS.first
+  end
+end
+
+puts "genquiz v#{VERSION}" if ARGS[:version]
+
+if ARGS[:help] or ARGS[:files].empty?
+  puts USAGE unless ARGS[:version]
+  puts HELP if ARGS[:help]
+  exit
+end
+
 quiz = Quiz.new()
 
-# TODO: si no se le pasan parámetros lee todos los archivos del directorio questions y muestra una descripción de cada uno
-
-if ARGV.length == 0 then
-  puts "USO:"
-  puts "  genquiz [lista de archivos de preguntas] > cuestionario.xml"
-  puts "Ejemplos:"
-  puts "  genquiz questions/cloze_addresses.rb > pregunta.xml"
-  puts "  genquiz questions/* > cuestionario.xml"
-  exit
-end
-
 begin
-  ARGV.each do |file|
+  ARGS[:files].each do |file|
+    question = nil
+    puts "Processing '#{file}'"
     question = eval(File.open(file).read)
-    quiz.add(question)
+    if question.is_a?(Hash)
+      quiz.add(question)
+    else
+      raise "question hash not found in '#{file}'"
+    end
   end
+  File.write(ARGS[:output], quiz)
+  puts "Quiz generated correctly in '#{ARGS[:output]}'"
+
 rescue Exception => e
   puts "Error: #{e.message}"
-  puts e.backtrace
+  #puts e.backtrace
   exit
 end
 
-puts quiz
