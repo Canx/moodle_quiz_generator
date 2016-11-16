@@ -25,7 +25,6 @@ Utilización
 
 ```
   genquiz -o <archivo_de_salida> [lista de archivos de preguntas] 
-```
  
   -h, --help     Mostrar esta ayuda
   -v, --version  Mostrar el número de versión
@@ -33,7 +32,6 @@ Utilización
 
 Ejemplos:
 
-```
   genquiz -o cuestionario.xml questions/cloze_addresses.rb 
   genquiz -o cuestionario.xml questions/*
 ```
