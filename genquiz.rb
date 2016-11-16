@@ -11,7 +11,7 @@ VERSION = 0.1
 
 USAGE = <<ENDUSAGE
 Uso:
-  genquiz -o cuestionario.xml [lista de archivos de preguntas]
+  genquiz -o <archivo_de_salida> [lista de archivos de preguntas]
 ENDUSAGE
 
 HELP = <<ENDHELP
