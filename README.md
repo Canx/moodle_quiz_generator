@@ -23,19 +23,19 @@ $ bundle install
 Utilización
 -----------
 
-Ejecuta el script 'genpreg.rb' pasándole como parámetro 1 o varios archivos de pregunta, como los que encontrarás en la carpeta '/questions'
+```
+  genquiz -o <archivo_de_salida> [lista de archivos de preguntas] 
+```
+ 
+  -h, --help     Mostrar esta ayuda
+  -v, --version  Mostrar el número de versión
+  -o, --output   El fichero donde se guardaran las preguntas
+
+Ejemplos:
 
 ```
-$ ./genpreg.rb q1.rb
-$ ./genpreg.rb q1.rb q2.rb
-$ ./genpreg.rb ./questions/* 
-```
-
-El comando generará por pantalla la salida en xml de las preguntas. Para guardar las preguntas rediríge la salida a un archivo:
-
-```
-$ ./genpreg.rb q1.rb > q1.xml
-$ ./genpreg.rb ./questions/* > quiz.xml
+  genquiz -o cuestionario.xml questions/cloze_addresses.rb 
+  genquiz -o cuestionario.xml questions/*
 ```
 
 Estructura de una pregunta
