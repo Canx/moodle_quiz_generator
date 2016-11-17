@@ -30,7 +30,13 @@ class IPGenerator
 
     # cada vez sacamos un elemento de la lista y actualizamos los parámetros
     gen = Random.new
-    class_ip = item[:class] || @class_list.sample
+
+    if item[:class].is_a?(Array) then
+      class_ip = item[:class].sample
+    else
+      class_ip = item[:class] || @class_list.sample
+    end
+
     private_ip = item[:private] || false
     default_mask = item[:default] || false
     input_mask = item[:mask]
