@@ -1,21 +1,40 @@
 question = {
   :type => :cloze,
-  :name => "Dirección a binario + mascara",
-  :description => "Completa la traducción a binario de las siguientes IP's y indica su clase:",
+  :name => "Dirección a binario",
+  :description => "Traduce a binario las siguientes direcciones junto con su máscara:",
+  :num => 10,
   :generators => {
      :ip => {
-       "ip" => { {:class => "A"} => 2,
-           {:class => "B"} => 2,
-           {:class => "C"} => 2,
-           {:class => "D"} => 2}}
-  },
+       "ip" => { {:mask => (8..28)} => 1}
+
+  }},
   :answers => {
-    :pre => "<br /><table><tr><th>Dirección</th><th>Dirección en binario</th><th>Clase (A,B, C o D)</th></tr>",
-    :answer => "<tr>
-                   <td><%= ip.to_addr %></td>
-                   <td>{1:SHORTANSWER:%100%<%= ip.to_bin[0] %>}.<%= ip.to_bin[1] + '.' + ip.to_bin[2] + '.' + ip.to_bin[3] %></td>
-                   <td>{1:MULTICHOICE:<%= '%100%' if ip.class_ip == 'A'%>A~<%= '%100%' if ip.class_ip == 'B'%>B~<%= '%100%' if ip.class_ip == 'C'%>C~<%= '%100%' if ip.class_ip == 'D'%>D}</td>
-                </tr>",
+    :pre => "<br /><table>",
+    :answer => "<tr><td>Dirección ip:</td><td><%= ip %></td></tr>
+                <tr><td>Dir. en binario:</td>
+                    <td>{1:SHORTANSWER:%100%<%= ip.to_bin[0] %>}.
+                        {1:SHORTANSWER:%100%<%= ip.to_bin[1] %>}.
+                        {1:SHORTANSWER:%100%<%= ip.to_bin[2] %>}.
+                        {1:SHORTANSWER:%100%<%= ip.to_bin[3] %>}</td></tr>
+                <tr><td>Máscara en binario:</td>
+                    <td>{1:SHORTANSWER:%100%<%= ip.netmask.to_bin[0] %>}.
+                        {1:SHORTANSWER:%100%<%= ip.netmask.to_bin[1] %>}.
+                        {1:SHORTANSWER:%100%<%= ip.netmask.to_bin[2] %>}.
+                        {1:SHORTANSWER:%100%<%= ip.netmask.to_bin[3] %>}</td></tr>
+                <tr><td>Dirección de red en binario:</td>
+                    <td>{1:SHORTANSWER:%100%<%= ip.network.to_bin[0] %>}.
+                        {1:SHORTANSWER:%100%<%= ip.network.to_bin[1] %>}.
+                        {1:SHORTANSWER:%100%<%= ip.network.to_bin[2] %>}.
+                        {1:SHORTANSWER:%100%<%= ip.network.to_bin[3] %>}</td></tr>
+               <tr><td>Dirección de broadcast en binario:</td>
+                    <td>{1:SHORTANSWER:%100%<%= ip.broadcast.to_bin[0] %>}.
+                        {1:SHORTANSWER:%100%<%= ip.broadcast.to_bin[1] %>}.
+                        {1:SHORTANSWER:%100%<%= ip.broadcast.to_bin[2] %>}.
+                        {1:SHORTANSWER:%100%<%= ip.broadcast.to_bin[3] %>}</td></tr>
+                <tr><td>Dirección de red decimal (CIDR):</td>
+                    <td>{1:SHORTANSWER:%100%<%= ip.network %>}</td></tr>
+                 <tr><td>Dirección de broadcast decimal (CIDR):</td>
+                    <td>{1:SHORTANSWER:%100%<%= ip.broadcast %>}</td></tr>",
     :post => "</table>"
   }
 }

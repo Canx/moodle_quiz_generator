@@ -26,6 +26,18 @@ class IPExtended
     @ip.broadcast(-1).to_s
   end  
 
+  def netmask()
+    IPExtended.new(@ip.netmask, nil, nil)
+  end
+ 
+  def network()
+    IPExtended.new(@ip.network, nil, nil)
+  end
+
+  def broadcast()
+    IPExtended.new(@ip.broadcast, nil, nil)
+  end
+
   def to_bin()
     @ip.to_b.to_s.rjust(32, '0').scan(/.{0,8}/)
   end
@@ -40,7 +52,7 @@ class IPExtended
 
   # class methods 
   def self.to_bin(ip)
-    IP.new(ip).to_b.to_s.rjust(32, '0').scan(/.{0,8}/)
+    IPExtended.new(ip).to_b.to_s.rjust(32, '0').scan(/.{0,8}/)
   end
 
   def to_s

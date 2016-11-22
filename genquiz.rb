@@ -60,6 +60,7 @@ begin
     puts "Processing '#{file}'"
     question = eval(File.open(file).read)
     if question.is_a?(Hash)
+      puts question[:name]
       quiz.add(question)
     else
       raise "question hash not found in '#{file}'"
