@@ -2,7 +2,7 @@ question = {
   :type => :cloze,
   :name => "Dirección a binario",
   :description => "Traduce a binario las siguientes direcciones junto con su máscara:",
-  :num => 10,
+  :num => 1,
   :generators => {
      :ip => {
        "ip" => { {:mask => (8..28)} => 1}

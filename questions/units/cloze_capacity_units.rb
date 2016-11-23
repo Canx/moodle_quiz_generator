@@ -10,7 +10,7 @@ question = {
     :code => {
       :result_unit => lambda { | params | return ["GB","MB","KB","B","b"].to_set.delete(params[:origin_unit]).to_a.sample  },
       :result_size => lambda { | params | 
-                                  conversion_hash = {["TB","GB"] => 1000, ["GB","MB"] => 1000, ["MB","KB"] => 1000, ["KB","B"] => 1000, ["B", "b"] => 8}
+                                  conversion_hash = {["TB","GB"] => 1024, ["GB","MB"] => 1024, ["MB","KB"] => 1024, ["KB","B"] => 1024, ["B", "b"] => 8}
                                   return CodeGenerator.to_unit(params[:origin_size], params[:origin_unit], params[:result_unit], conversion_hash)
                           }
    }},

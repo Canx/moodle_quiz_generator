@@ -13,16 +13,17 @@ module Matching
   def xml_questiontext(xml_builder)
     xml_builder.questiontext(:format => "html") do |qt|
       qt.text @description
+    end
 
-      @answers.each do |option1, option2|
-        qt.subquestion do |sq|
-          sq.text option1
-          sq.answer do |a|
-            a.text option2
-          end
+    xml_builder.shuffleanswers "true"
+
+    @answers.each do |option1, option2|
+      xml_builder.subquestion(:format => "moodle_auto_format") do |sq|
+        sq.text option1
+        sq.answer do |a|
+          a.text option2
         end
       end
     end
-    xml_builder.shuffleanswers "true"
   end
 end
