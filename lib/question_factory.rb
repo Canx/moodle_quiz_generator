@@ -1,7 +1,7 @@
-require './lib/question.rb'
-require './lib/ip_generator.rb'
-require './lib/random_generator.rb'
-require './lib/code_generator.rb'
+require 'question.rb'
+require 'ip_generator.rb'
+require 'random_generator.rb'
+require 'code_generator.rb'
 
 class QuestionFactory
   @question_hash

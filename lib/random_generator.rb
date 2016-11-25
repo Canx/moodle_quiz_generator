@@ -1,5 +1,5 @@
-require './lib/generator.rb'
-require './lib/ip_extended.rb'
+require 'generator.rb'
+require 'ip_extended.rb'
 
 # :random => {{ :range => (1..100), :multiplier => 100 } => 1 }
 # mandatory: range

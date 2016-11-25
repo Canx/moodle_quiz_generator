@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require './lib/question_factory.rb'
+require 'question_factory.rb'
 require 'builder'
 
 # Quiz class

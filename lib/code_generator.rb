@@ -1,4 +1,3 @@
-
 # :code => lambda { |parameter1, parameter2, parameter3,...| code }
 
 class CodeGenerator
