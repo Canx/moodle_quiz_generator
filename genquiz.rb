@@ -71,7 +71,7 @@ begin
 
 rescue Exception => e
   puts "Error: #{e.message}"
-  #puts e.backtrace
+  puts e.backtrace
   exit
 end
 

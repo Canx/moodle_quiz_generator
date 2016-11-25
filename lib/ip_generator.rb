@@ -1,17 +1,13 @@
+require './lib/generator.rb'
 require './lib/ip_extended.rb'
 
-class IPGenerator
-  attr_reader :variable
-  @variable
+class IPGenerator < Generator
 
-  def initialize(hash)
-    @variable = hash[0]
-    ipgen_hash = hash[1]
-
+  def post_initialize
     @items = Array.new()
     @class_list = Array.new(["A","B","C","D"])
  
-    ipgen_hash.each do |tipo,cantidad|
+    @hash.each do |tipo,cantidad|
       (1..cantidad).each do |n|
         @items << tipo
       end
