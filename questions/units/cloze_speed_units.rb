@@ -11,7 +11,7 @@ question = {
   },
   :answers => {
     :pre => "<table><tr><th>Archivo (MiB)</th><th>Velocidad descarga (Mbps)</th><th>Tiempo de descarga (s)</th>",
-    :answer => "<tr><td><%= file_size %></td><td><%= speed %></td><td>{1:NUMERICAL:=<%= ((file_size*1024*1024)/(1000*1000)).fdiv(speed) %>:0.1}</td></tr>",
+    :answer => "<tr><td><%= file_size %></td><td><%= speed %></td><td>{1:NUMERICAL:=<%= ((file_size*1024*1024*8)/(1000*1000)).fdiv(speed) %>:0.1}</td></tr>",
     :post => "</table>"
   }
 }
