@@ -34,6 +34,10 @@ class IPExtended
     IPExtended.new(@ip.network, nil, nil)
   end
 
+  def host()
+    @ip - @ip.network
+  end
+
   def broadcast()
     IPExtended.new(@ip.broadcast, nil, nil)
   end
