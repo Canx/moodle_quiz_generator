@@ -1,10 +1,10 @@
 question = {
   :type => :cloze,
   :name => "Información de la red",
-  :description => "Indica el número de hosts, dirección de máscara, ip inicial y ip final de las siguientes redes:",
-  :generators => {
-    :ip => {
-       "ip" => { {:mask => (16..28)} => 1}}
+  :description => "Indica cual es la dirección inicial y final de las siguientes redes:",
+  :vars => {
+    "ip" => { :ip => { :mask => (16..28)},
+              :num => 1}
   },
   :answers => {
     :pre => "    <br /><pre>\n

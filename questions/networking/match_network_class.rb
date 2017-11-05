@@ -2,7 +2,6 @@ question = {
    :type => :matching,
    :name => "Clases de subredes",
    :description => "Empareja cada IP con su clase",
-   :num => 3,
    :generators => { 
       :ip => {
          "ip" => {

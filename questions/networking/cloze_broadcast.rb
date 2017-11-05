@@ -2,7 +2,6 @@ question = {
   :type => :cloze,
   :name => "Direcciones inicial y final",
   :description => "Indica cual es la dirección de red, inicial, final y de broadcast de las siguientes ips:",
-  :num => 10,
   :generators => {
     :ip => 
         { "ip" => {

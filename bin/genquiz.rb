@@ -16,13 +16,14 @@ HELP = <<ENDHELP
   -h, --help     Mostrar esta ayuda
   -v, --version  Mostrar el número de versión
   -o, --output   El fichero donde se guardaran las preguntas
+  -n, --number   Número de preguntas a generar
 
 Ejemplos:
-  genquiz -o cuestionario.xml questions/cloze_addresses.rb 
+  genquiz -o -n 3 cuestionario.xml questions/cloze_addresses.rb 
   genquiz -o cuestionario.xml questions/*
 ENDHELP
 
-ARGS = { :output=>'quiz.xml', :files=>[] }
+ARGS = { :output=>'quiz.xml', :number => 1, :files=>[] }
 UNFLAGGED_ARGS = [ :files ]
 next_arg = UNFLAGGED_ARGS.first
 ARGV.each do |arg|
@@ -30,6 +31,7 @@ ARGV.each do |arg|
     when '-h','--help'	then ARGS[:help] = true
     when '-v','--version' then ARGS[:version] = true
     when '-o','--output' then next_arg = :output
+    when '-n','--number' then next_arg = :number
     else
       if next_arg
         if next_arg == :files
@@ -50,7 +52,7 @@ if ARGS[:help] or ARGS[:files].empty?
   exit
 end
 
-quiz = Quiz.new()
+quiz = Quiz.new(ARGS[:number])
 
 begin
   ARGS[:files].each do |file|

@@ -2,7 +2,6 @@ question = {
   :type => :cloze,
   :name => "Dirección/mascara. Red y host",
   :description => "Dadas las siguientes direcciones de red y su número de máscara, indica cual es la dirección de red y la dirección de host:",
-  :num => 10,
   :generators => {
     :ip => {
       "ip" => { {class: ["A","B","C"], default: true} => 1}

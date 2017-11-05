@@ -7,15 +7,16 @@ require 'builder'
 
 class Quiz
 
-  def initialize
+  def initialize(items = 1)
+    @items = items
     @questions = Array.new
     @xml = Builder::XmlMarkup.new( :indent => 2 )
   end
 
   def add(question_hash)
-    question_hash[:num] = 1 if !question_hash[:num]
+    question_hash[:num] = @items
 
-    (1..question_hash[:num].to_i).each do |id|
+    (1..@items.to_i).each do |id|
       question_hash[:id] = id
       question_factory = QuestionFactory.new(question_hash)
       question = question_factory.create()

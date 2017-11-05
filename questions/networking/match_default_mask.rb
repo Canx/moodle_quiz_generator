@@ -1,4 +1,3 @@
-
 question = {
   :type => :matching,
   :name => "Máscara por defecto",

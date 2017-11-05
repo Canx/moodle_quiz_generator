@@ -2,7 +2,6 @@ question = {
   :type => :cloze,
   :name => "Unidades de velocidad",
   :description => "Indica cuanto tiempo en segundos tardarías en descargar los siguientes archivos, dada la velocidad de descarga indicada:",
-  :num => 10,
   :generators => {
     :random => {
       :file_size => {{ :range => (5..2000) } => 1},

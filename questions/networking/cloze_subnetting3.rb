@@ -1,7 +1,6 @@
 question = {
   :type => :cloze,
   :name => "Dividir en subredes y datos",
-  :num => 10,
   :generators => {
     :ip => {
       "ip1" => { {mask: (8..24)} => 1 }
