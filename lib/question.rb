@@ -1,8 +1,8 @@
 require 'erb'
 require 'ostruct'
-require './lib/question_cloze.rb'
-require './lib/question_matching.rb'
-require './lib/question_multichoice.rb'
+require 'question_cloze.rb'
+require 'question_matching.rb'
+require 'question_multichoice.rb'
 
 class Question
   @type
